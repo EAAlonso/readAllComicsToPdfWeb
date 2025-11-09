@@ -1,30 +1,125 @@
 <!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Generador de PDF - ReadAllComics (cliente)</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+      /* Small local styles to ensure the UI looks OK */
+      body {
+        font-family: system-ui, Segoe UI, Roboto, Arial;
+        max-width: 860px;
+        margin: 32px auto;
+        padding: 0 16px;
+      }
+      .card {
+        background: #fff;
+        padding: 18px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+      }
+      button {
+        margin-top: 10px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 0;
+        background: #0078d4;
+        color: #fff;
+        cursor: pointer;
+      }
+      button[disabled] {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      progress {
+        width: 100%;
+        height: 18px;
+      }
+      .small {
+        font-size: 0.9rem;
+        color: #555;
+      }
+      .log {
+        white-space: pre-wrap;
+        margin-top: 8px;
+        background: #f8f9fb;
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Generador de PDF (cliente)</h1>
+    <div class="card">
+      <label for="url">URL de la página (readallcomics.com)</label>
+      <input
+        id="url"
+        type="text"
+        placeholder="https://readallcomics.com/...?" />
+
+      <div
+        style="display: flex; gap: 8px; align-items: center; margin-top: 10px">
+        <button id="generate">Generar PDF</button>
+        <div class="small" id="status">Estado: esperando</div>
+      </div>
+
+      <div style="margin-top: 12px">
+        <label>Progreso</label>
+        <progress id="progress" value="0" max="100"></progress>
+      </div>
+
+      <div class="log" id="log">Mensajes de la aplicación...</div>
+    </div>
+
+    <!-- pdf-lib (UMD bundle) -->
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="/js/pdf_generator.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Static Site</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
     <header>
-        <h1>Welcome to My Static Site</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-        </nav>
+      <h1>Welcome to My Static Site</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
-        <section>
-            <h2>Homepage</h2>
-            <p>This is the homepage of my static site. Here you can find various information and links to other pages.</p>
-        </section>
+      <section>
+        <h2>Homepage</h2>
+        <p>
+          This is the homepage of my static site. Here you can find various
+          information and links to other pages.
+        </p>
+      </section>
     </main>
     <footer>
-        <p>&copy; 2023 My Static Site</p>
+      <p>&copy; 2023 My Static Site</p>
     </footer>
     <script src="js/main.js"></script>
-</body>
+  </body>
 </html>
