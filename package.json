@@ -1,0 +1,16 @@
+{
+  "name": "my-static-site",
+  "version": "1.0.0",
+  "description": "A simple static website for GitHub Pages",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server",
+    "build": "echo 'No build step required for static site'"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
