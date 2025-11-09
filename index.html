@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Generador de PDF - ReadAllComics (cliente)</title>
-    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
     <style>
       /* Small local styles to ensure the UI looks OK */
       :root {
@@ -127,7 +127,15 @@
 
     <!-- pdf-lib (UMD bundle) -->
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
-    <script src="js/pdf_generator.js"></script>
-    <script src="js/main.js"></script>
+    <script src="./js/pdf_generator.js"></script>
+    <script src="./js/main.js"></script>
+
+    <script>
+      // Quick runtime check to help debugging: report whether the function is available
+      console.log(
+        "Check: window.createPdfFromUrl =",
+        typeof window.createPdfFromUrl
+      );
+    </script>
   </body>
 </html>
