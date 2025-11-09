@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const status = document.getElementById("status");
   const progress = document.getElementById("progress");
   const log = document.getElementById("log");
+  const darkToggle = document.getElementById("darkToggle");
 
   function appendLog(msg) {
     const t = new Date().toLocaleTimeString();
@@ -12,6 +13,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function setStatus(s) {
     status.textContent = "Estado: " + s;
+  }
+
+  // Dark mode toggle
+  if (darkToggle) {
+    darkToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      darkToggle.textContent = document.body.classList.contains("dark")
+        ? "☀️"
+        : "🌙";
+    });
+  }
+
+  // Early check: ensure the pdf generator function exists
+  if (typeof window.createPdfFromUrl !== "function") {
+    appendLog(
+      "Error: la función createPdfFromUrl no está disponible. Revisa que js/pdf_generator.js y pdf-lib se carguen correctamente."
+    );
+    console.error("window.createPdfFromUrl is not a function");
+    setStatus("Error — revisa los mensajes");
+    // keep the generate button available but warn on click
   }
 
   generateBtn.addEventListener("click", async () => {
@@ -27,6 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
     appendLog("Iniciando generación para: " + url);
 
     try {
+      if (typeof window.createPdfFromUrl !== "function") {
+        throw new Error(
+          "La función createPdfFromUrl no está disponible. Comprueba la consola para más detalles."
+        );
+      }
       const onProgress = (current, total) => {
         const percent = Math.round((current / total) * 100);
         progress.value = percent;
@@ -64,4 +90,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-// This file is intentionally left blank.
