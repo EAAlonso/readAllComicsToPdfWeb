@@ -17,7 +17,9 @@ function extractNumberFromFilename(name) {
   return m ? parseInt(m[1], 10) : 0;
 }
 
-async function createPdfFromUrl(url, onProgress) {
+// We wrap the implementation so we always expose a function on window even
+// if pdf-lib hasn't been loaded yet; the wrapper will give a clear error.
+const _createPdfImpl = async function (url, onProgress) {
   // onProgress(current, total)
   log("Starting createPdfFromUrl for " + url);
 
@@ -67,6 +69,13 @@ async function createPdfFromUrl(url, onProgress) {
 
   const total = imgUrls.length;
 
+  // Validate pdf-lib available
+  if (typeof PDFLib === "undefined") {
+    throw new Error(
+      'La librería pdf-lib no está cargada. Asegúrate de incluir <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script> antes de este archivo.'
+    );
+  }
+
   // Crear PDF con pdf-lib
   const pdfDoc = await PDFLib.PDFDocument.create();
 
@@ -90,7 +99,8 @@ async function createPdfFromUrl(url, onProgress) {
         try {
           embeddedImage = await pdfDoc.embedJpg(u8);
         } catch (e2) {
-          throw new Error("Formato de imagen no soportado para: " + imgUrl);
+          console.warn("Formato no soportado para:", imgUrl, e2);
+          continue;
         }
       }
 
@@ -117,7 +127,10 @@ async function createPdfFromUrl(url, onProgress) {
   const pdfBytes = await pdfDoc.save();
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
   return { blob, title: pageTitle };
-}
+};
 
-// Make available globally for the simple script usage
-window.createPdfFromUrl = createPdfFromUrl;
+// Expose a stable wrapper on window so main.js can always call it. The
+// wrapper checks for pdf-lib at call time and returns a helpful error.
+window.createPdfFromUrl = async function (url, onProgress) {
+  return await _createPdfImpl(url, onProgress);
+};
