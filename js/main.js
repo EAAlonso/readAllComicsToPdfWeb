@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const status = document.getElementById("status");
   const progress = document.getElementById("progress");
   const log = document.getElementById("log");
-  const darkToggle = document.getElementById("darkToggle");
 
   function appendLog(msg) {
     const t = new Date().toLocaleTimeString();
@@ -15,15 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     status.textContent = "Estado: " + s;
   }
 
-  // Dark mode toggle
-  if (darkToggle) {
-    darkToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      darkToggle.textContent = document.body.classList.contains("dark")
-        ? "☀️"
-        : "🌙";
-    });
-  }
+  // UI is dark-only; no toggle required
 
   // Early check: ensure the pdf generator function exists
   if (typeof window.createPdfFromUrl !== "function") {

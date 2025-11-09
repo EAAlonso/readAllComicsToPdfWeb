@@ -8,12 +8,12 @@
     <style>
       /* Small local styles to ensure the UI looks OK */
       :root {
-        --bg: #ffffff;
-        --card: #fff;
-        --text: #0b0f12;
-        --muted: #555;
-        --accent: #0078d4;
-        --log: #f8f9fb;
+        --bg: #07101a;
+        --card: #071827;
+        --text: #e6eef6;
+        --muted: #9fb7cc;
+        --accent: #0a66c2;
+        --log: #02101a;
       }
       body {
         font-family: system-ui, Segoe UI, Roboto, Arial;
@@ -70,28 +70,20 @@
         border: 1px solid #eee;
       }
 
-      /* Dark mode variables */
-      body.dark {
-        --bg: #07101a;
-        --card: #071827;
-        --text: #e6eef6;
-        --muted: #9fb7cc;
-        --accent: #0a66c2;
-        --log: #02101a;
-      }
+      /* (Always dark) */
 
       /* Dark-mode small adjustments */
-      body.dark .card {
+      .card {
         box-shadow: none;
         border: 1px solid rgba(255, 255, 255, 0.03);
       }
-      body.dark input[type="text"],
-      body.dark progress {
+      input[type="text"],
+      progress {
         background: transparent;
         color: var(--text);
         border: 1px solid rgba(255, 255, 255, 0.06);
       }
-      body.dark button {
+      button {
         background: var(--accent);
       }
     </style>
@@ -117,12 +109,7 @@
         style="display: flex; gap: 8px; align-items: center; margin-top: 10px">
         <button id="generate">Generar PDF</button>
         <div class="small" id="status">Estado: esperando</div>
-        <button
-          id="darkToggle"
-          title="Alternar modo oscuro"
-          style="margin-left: 8px; background: #444">
-          🌙
-        </button>
+        <!-- dark-only UI (no toggle) -->
       </div>
 
       <div style="margin-top: 12px">

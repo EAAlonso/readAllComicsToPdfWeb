@@ -1,51 +1,56 @@
+/* Dark theme for the whole static site */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #07101a;
+  color: #e6eef6;
 }
 
 header {
-    background: #35424a;
-    color: #ffffff;
-    padding: 10px 0;
-    text-align: center;
+  background: #071827;
+  color: #e6eef6;
+  padding: 10px 0;
+  text-align: center;
 }
 
 nav {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 nav a {
-    color: #ffffff;
-    text-decoration: none;
-    margin: 0 15px;
+  color: #9fb7cc;
+  text-decoration: none;
+  margin: 0 15px;
 }
 
 nav a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
 }
 
 footer {
-    background: #35424a;
-    color: #ffffff;
-    text-align: center;
-    padding: 10px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+  background: #071827;
+  color: #9fb7cc;
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
 
-h1, h2, h3 {
-    color: #35424a;
+h1,
+h2,
+h3 {
+  color: #e6eef6;
 }
 
 p {
-    line-height: 1.6;
+  line-height: 1.6;
+  color: #cfe6fb;
 }
