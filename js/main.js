@@ -37,6 +37,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   generateBtn.addEventListener("click", async () => {
     const url = urlInput.value.trim();
+    // read proxy input if provided
+    const proxyInput = document.getElementById("proxy");
+    if (proxyInput && proxyInput.value.trim()) {
+      window.PROXY_URL = proxyInput.value.trim();
+      appendLog("Usando proxy: " + window.PROXY_URL);
+    } else {
+      window.PROXY_URL = undefined;
+    }
     if (!url) {
       appendLog("Introduce una URL válida.");
       return;

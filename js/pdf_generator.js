@@ -2,9 +2,20 @@
 // Exporta createPdfFromUrl(url, onProgress) -> Promise<{blob, title}>
 
 async function fetchText(url) {
-  const r = await fetch(url);
+  const r = await fetchWithOptionalProxy(url);
   if (!r.ok) throw new Error(`HTTP ${r.status} al obtener ${url}`);
   return await r.text();
+}
+
+async function fetchWithOptionalProxy(url, opts) {
+  // If a global proxy is set (window.PROXY_URL), call the proxy with ?url=encoded
+  if (typeof window.PROXY_URL === "string" && window.PROXY_URL.trim()) {
+    const proxy = window.PROXY_URL.trim();
+    const sep = proxy.includes("?") ? "&" : "?";
+    const proxyUrl = `${proxy}${sep}url=${encodeURIComponent(url)}`;
+    return await fetch(proxyUrl, opts);
+  }
+  return await fetch(url, opts);
 }
 
 function log(msg) {
@@ -83,7 +94,7 @@ const _createPdfImpl = async function (url, onProgress) {
   for (let i = 0; i < imgUrls.length; i++) {
     const imgUrl = imgUrls[i];
     try {
-      const imgResp = await fetch(imgUrl);
+      const imgResp = await fetchWithOptionalProxy(imgUrl);
       if (!imgResp.ok) {
         console.warn("Imagen no encontrada", imgUrl, imgResp.status);
         continue;
